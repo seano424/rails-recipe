@@ -19,3 +19,16 @@ ingredients.each do |ingredient|
   })
 end
 puts "finished"
+
+puts "Destroying all recipes from DB..."
+Recipe.destroy_all
+puts "Creating recipes"
+recipes = []
+100.times { recipes << Faker::Food.dish }
+recipes.uniq!
+recipes.each do |recipe|
+  Recipe.create!({
+    name: recipe,
+    description: Faker::Food.description
+  })
+end
