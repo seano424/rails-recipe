@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+puts "Getting ready for seeds"
+ingredients = []
+100.times { ingredients << Faker::Food.ingredient }
+ingredients.uniq!
+puts "Deleting ingredients"
+Ingredient.destroy_all
+puts "Adding ingredients"
+ingredients.each do |ingredient|
+  Ingredient.create!({
+    name: ingredient
+  })
+end
+puts "finished"
